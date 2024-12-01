@@ -1,24 +1,17 @@
 const express = require("express");
-    
 const app = express();
 
 app.use(express.json());
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
+// routes mentioned here ...
+
+app.post("signup", () => {});
+app.post("signin", () => {});
+app.post("addTodo", () => {});
+app.put("updateTodo", () => {});
+app.delete("deleteTodo", () => {});
+
+app.listen(PORT, () => {
+  console.log(`Server started on PORT ${PORT}
+    `);
 });
-
-app.post("/signup", (req, res) => {
-    try{
-        const {username, password} = req.body;
-
-
-
-
-
-    } catch(error) {
-        console.log(error);
-    }
-});
-
-app.listen(3000);
