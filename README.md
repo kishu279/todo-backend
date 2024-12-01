@@ -1,29 +1,78 @@
-## Creating a todo backend
+# **Todo Backend**
 
-schema
+A backend for a Todo application built with Node.js, Express, and MongoDB.
 
-userSchema = {
-'username' : "xyz",
-'email' : "xyz@gmail.com",
-'password' : 'xyz123'
+## **Schemas**
+
+### **User Schema**
+
+```javascript
+{
+  username: String,      // e.g., "xyz"
+  email: String,         // e.g., "xyz@gmail.com"
+  password: String       // e.g., "xyz123"
 }
+```
 
-todoSchema = {
-'userid' : 'ref_user',
-'title' : 'todo'
-'isdone' : boolean,
-'desc' : 'string'
-'createDate' : 'date.now()'
+### **Todo Schema**
+
+```javascript
+{
+  userid: { type: Schema.Types.ObjectId, ref: "User" },  // Reference to User
+  title: String,                                        // e.g., "My Todo"
+  isdone: Boolean,                                      // e.g., false
+  desc: String,                                         // e.g., "Todo description"
+  createDate: { type: Date, default: Date.now }         // Automatically set date
 }
+```
 
-routes :
+## **Routes**
 
-signin - post
-signup - post
-addTodo - post
-updateTodo - put
-deleteTodo - delete
+### **User Routes**
 
-middleware :
+| Route     | Method | Description              |
+| --------- | ------ | ------------------------ |
+| `/signin` | POST   | Sign in an existing user |
+| `/signup` | POST   | Sign up a new user       |
 
-Authenticate
+### **Todo Routes**
+
+| Route         | Method | Description             |
+| ------------- | ------ | ----------------------- |
+| `/addTodo`    | POST   | Add a new todo          |
+| `/updateTodo` | PUT    | Update an existing todo |
+| `/deleteTodo` | DELETE | Delete a todo           |
+
+## **Middleware**
+
+### **Authenticate**
+
+- Ensures users are authenticated before accessing protected routes.
+
+---
+
+## **How to Run**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/kishu279/todo-backend.git
+   cd todo-backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up your environment variables in `.env`:
+   ```plaintext
+   MONGO_URI=<your-mongodb-uri>
+   JWT_SECRET=<your-secret-key>
+   PORT=5000
+   ```
+4. Start the server:
+   ```bash
+   npm start
+   ```
+
+---
+
+Feel free to create a pull request if needed !!!
