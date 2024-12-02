@@ -1,8 +1,8 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const mongoose = require('mongoose');
-const User = require('./../Model/UserModel');
+const mongoose = require("mongoose");
+const User = require("./../Model/UserModel");
 
 const app = express();
 const router = express.Router();
@@ -10,7 +10,7 @@ const router = express.Router();
 app.use(express.json());
 
 const authenticate = async (req, res, next) => {
-  const token = req.headers["Authorization"];
+  const token = req.headers['authorization'];
 
   if (!token) {
     res.status(400).json({
@@ -24,15 +24,16 @@ const authenticate = async (req, res, next) => {
 
     const email = decoded.email;
 
-    const user = await User.findOne({email:decoded.email});
-    if(!user) {
-        return res.status(400).json({
-            success: false,
-            message: "User not found",
-        })
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
     req._id = decoded._id;
+    console.log(req._id);
 
     next();
   } catch (error) {

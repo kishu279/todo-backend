@@ -6,6 +6,7 @@ const Todo = require("./Model/TodoModel");
 const mongoose = require("mongoose");
 const auth = require("./Middleware/Auth");
 const userRoutes = require("./UserRoutes/userRoute");
+const userTodo = require("./UserRoutes/userTodo");
 
 const app = express();
 
@@ -34,14 +35,17 @@ app.get("/", async (req, res) => {
 
 app.use("/user", userRoutes);
 
-app.get("/user", auth, (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: "protected routes",
-  });
-}); // Authentication Middleware
+// app.use("/user", auth, (req, res) => {
+//   console.log(req._id);      // auth is going to req._id for the next
 
-app.post("addTodo", () => {});
+//   return res.status(200).json({
+//     success: true,
+//     message: "protected routes",
+//   });
+// }); // Authentication Middleware
+
+app.use("/todo", userTodo); // add todos
+
 app.put("updateTodo", () => {});
 app.delete("deleteTodo", () => {});
 
