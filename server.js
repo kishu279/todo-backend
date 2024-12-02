@@ -46,7 +46,4 @@ app.use("/user", userRoutes);
 
 app.use("/todo", userTodo); // add todos
 
-app.put("updateTodo", () => {});
-app.delete("deleteTodo", () => {});
-
 main();

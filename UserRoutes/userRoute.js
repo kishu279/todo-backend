@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const User = require("./../Model/UserModel");
 
+const app = express();
+app.use(express.json());
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -13,7 +15,7 @@ router.post("/signup", async (req, res) => {
 
     if (!username || !email || !password) {
       return res.status(400).json({
-        sucess: true,
+        sucess: false,
         message: "Provide all details",
       });
     }
@@ -67,7 +69,7 @@ router.post("/signin", async (req, res) => {
       { email: existingUser.email, _id: existingUser._id },
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: "1h",
+        expiresIn: "5h",
       }
     );
 

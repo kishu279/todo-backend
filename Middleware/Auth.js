@@ -10,7 +10,7 @@ const router = express.Router();
 app.use(express.json());
 
 const authenticate = async (req, res, next) => {
-  const token = req.headers['authorization'];
+  const token = req.headers["authorization"];
 
   if (!token) {
     res.status(400).json({
@@ -33,7 +33,6 @@ const authenticate = async (req, res, next) => {
     }
 
     req._id = decoded._id;
-    console.log(req._id);
 
     next();
   } catch (error) {
